@@ -1,0 +1,37 @@
+{
+  "compilerOptions": {
+    "target": "ES6",
+    "lib": ["dom", "dom.iterable", "esnext"],
+    "allowJs": true,
+    "skipLibCheck": true,
+    "strict": false,
+    "forceConsistentCasingInFileNames": true,
+    "noEmit": true,
+    "esModuleInterop": true,
+    "module": "esnext",
+    "moduleResolution": "node",
+    "resolveJsonModule": true,
+    "isolatedModules": true,
+    "jsx": "preserve",
+
+    /*
+     * The baseUrl configuration option allows you to import
+     * directly from the root of the project.
+     */
+    "baseUrl": ".",
+    "paths": {
+      "~/*": ["./*"] // This mapping is relative to "baseUrl"
+    }
+  },
+  // packages contains forks of other repos.
+  "exclude": ["node_modules", ".next", "out", "packages"],
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "**/*.js"],
+  /**
+   * Import additional types for use with TypeScript.
+   * These types come from @types/ modules and are available GLOBALLY.
+   * Defaults to all installed @types/ packages.
+   */
+  // "types": [
+  //   "object-hash"
+  // ]
+}

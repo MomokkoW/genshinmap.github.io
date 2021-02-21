@@ -1,17 +1,26 @@
 module.exports = {
+  parser: '@typescript-eslint/parser',
+  plugins: ['@typescript-eslint', 'react-hooks', 'prettier', 'mui-unused-classes'],
+  extends: [
+    'eslint:recommended',
+    //    'airbnb',
+    'plugin:react/recommended',
+    'plugin:react-hooks/recommended',
+    'plugin:@typescript-eslint/recommended',
+    'prettier',
+    'prettier/@typescript-eslint',
+  ],
   env: {
+    es6: true,
     browser: true,
+    jest: true,
     node: true,
   },
   settings: {
-    // Import should respect ~ as './src'
-    'import/resolver': {
-      'babel-plugin-root-import': {},
+    react: {
+      version: 'detect',
     },
   },
-  parser: '@babel/eslint-parser',
-  extends: ['airbnb', 'prettier', 'prettier/react'],
-  plugins: ['@babel', 'prettier', 'mui-unused-classes', 'json-files'],
   rules: {
     /**
      * Set up basic formatting rules with the Prettier plugin.
@@ -23,13 +32,32 @@ module.exports = {
      * Add a warning for unused variables, except if they start with '_'.
      * This flags the variable as 'unused, but potentially used in future'.
      */
-    'no-unused-vars': [
+    '@typescript-eslint/no-unused-vars': [
       'warn',
       {
         varsIgnorePattern: '_.*', // Prefix variables you know will be unused with an underscore.
         argsIgnorePattern: '_.*', // Prefix arguments you know will be unused with an underscore.
       },
     ],
+
+    /**
+     * NextJS defaults.
+     */
+    'react/react-in-jsx-scope': ['off'],
+    'react/display-name': ['off'],
+    'react/prop-types': ['off'],
+    '@typescript-eslint/explicit-function-return-type': ['off'],
+    '@typescript-eslint/explicit-member-accessibility': ['off'],
+    '@typescript-eslint/indent': ['off'],
+    '@typescript-eslint/member-delimiter-style': ['off'],
+    '@typescript-eslint/no-explicit-any': ['off'],
+    '@typescript-eslint/no-var-requires': ['off'],
+    '@typescript-eslint/no-use-before-define': ['off'],
+
+    /**
+     * Enable TypeScript checking.
+     */
+    '@typescript-eslint/explicit-module-boundary-types': ['warn'],
 
     /**
      * Allow use of console commands at specific log levels.
@@ -46,20 +74,18 @@ module.exports = {
     'object-shorthand': ['warn'],
     'react/jsx-boolean-value': ['warn'],
 
-    /**
-     * Validate Node JSON files.
-     */
-    'json-files/no-branch-in-dependencies': ['error'],
-    'json-files/require-engines': ['error'],
-    'json-files/require-license': ['error'],
-    'json-files/restrict-ranges': ['error'],
-    'json-files/sort-package-json': ['error'],
+    // Enforce Rules of Hooks
+    // https://github.com/facebook/react/blob/c11015ff4f610ac2924d1fc6d569a17657a404fd/packages/eslint-plugin-react-hooks/src/RulesOfHooks.js
+    'react-hooks/rules-of-hooks': 'error',
+
+    // Verify the list of the dependencies for Hooks like useEffect and similar
+    // https://github.com/facebook/react/blob/1204c789776cb01fbaf3e9f032e7e2ba85a44137/packages/eslint-plugin-react-hooks/src/ExhaustiveDeps.js
+    'react-hooks/exhaustive-deps': 'error',
 
     /**
      * Turn off rules I don't like, or that annoy me.
      */
     'react/jsx-filename-extension': ['off'], // Tried to turn this on but babel-plugin-root-import complains.
-    'react/prop-types': ['off'], // I don't use TypeScript.
     'no-underscore-dangle': ['off'], // Allow dangling underscores in identifier names.
     'no-case-declarations': ['off'], // Allow variables to be declared in case blocks.
     'import/prefer-default-export': ['off'], // Allow single exports in files. They may get more later.

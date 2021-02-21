@@ -5,13 +5,13 @@ cache:
   directories:
     - node_modules
 script:
-  - npm test
-  - npm run build
+  - yarn test
+  - yarn export
 deploy:
   provider: pages
   skip_cleanup: true
   github_token: $github_token
-  local_dir: build
-  # Push the build artifacts to the gh-pages branch if the deployment is on 'master'.
+  local_dir: out
+  # Push the artifacts to the gh-pages branch if the deployment is on 'master'.
   on:
     branch: master

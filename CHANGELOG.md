@@ -1027,3 +1027,7 @@ Here is a summary of major changes from v0.10.0-v0.10.4:
 - Fixed an issue where the Japanese language would not be properly recognized by browser locale detection.
 - Fixed an issue where Dragonspine displayed Electro Cicin Mages rather than Cryo Cicin Mages.
 - Removed JSONC handler.
+
+# 0.12.0 NextJS Revamp
+- The site is now statically built in NextJS for improved performance.
+- Began the slow process of migrating to TypeScript for improved stability.
